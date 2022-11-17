@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/abstractClasses/abstractClasses.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/abstractClasses/abstractClasses.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/abstractDemo/abstractDemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/abstractDemo/abstractDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/arkadasSayilar/arkadasSayilar.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/arkadasSayilar/arkadasSayilar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/arraysDemo/arraysDemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/arraysDemo/arraysDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/classes/classes.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/classes/classes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/classesWithAttributes/classesWithAttributes.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/classesWithAttributes/classesWithAttributes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/conditionals/conditionals.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/conditionals/conditionals.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/datatypes/datatypes.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/datatypes/datatypes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/etiyaCamp.iml" filepath="$PROJECT_DIR$/.idea/etiyaCamp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/inheritance/inheritance.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/inheritance/inheritance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/inheritanceDemo/inheritanceDemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/inheritanceDemo/inheritanceDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/interfaceDemo/interfaceDemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/interfaceDemo/interfaceDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/interfaces/interfaces.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/interfaces/interfaces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/javaHelloWorld/javaHelloWorld.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/javaHelloWorld/javaHelloWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/loopDemo/loopDemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/loopDemo/loopDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/methodOverloading/methodOverloading.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/methodOverloading/methodOverloading.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/methods/methods.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/methods/methods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/methods2/methods2.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/methods2/methods2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/miniProjeAsalSayi/miniProjeAsalSayi.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/miniProjeAsalSayi/miniProjeAsalSayi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/mukemmelSayi/mukemmelSayi.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/mukemmelSayi/mukemmelSayi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/multiDimensionalArraydemo/multiDimensionalArraydemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/multiDimensionalArraydemo/multiDimensionalArraydemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/overriding/overriding.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/overriding/overriding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/polymorphism/polymorphism.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/polymorphism/polymorphism.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/reCapDemo2/reCapDemo2.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/reCapDemo2/reCapDemo2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/reCapDemo_Classes/reCapDemo_Classes.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/reCapDemo_Classes/reCapDemo_Classes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/recapDemo1/recapDemo1.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/recapDemo1/recapDemo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/sayiBulma/sayiBulma.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/sayiBulma/sayiBulma.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/sesliHarfler/sesliHarfler.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/sesliHarfler/sesliHarfler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/staticDemo/staticDemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/staticDemo/staticDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/stringsDemo/stringsDemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/stringsDemo/stringsDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/switchDemo/switchDemo.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/switchDemo/switchDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework1_JavaVideos/variables/variables.iml" filepath="$PROJECT_DIR$/homework1_JavaVideos/variables/variables.iml" />
+    </modules>
+  </component>
+</project>
