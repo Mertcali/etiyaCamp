@@ -1,5 +1,7 @@
 # Bu ödevde örnek sql sorguları yazılmış ve çıktıları paylaşılmıştır. 28/11/2022
 
+## Örnek database klasörün içerisinde paylaşılmıştır ve örnekler o database üzerinden yapılmıştır. Aynı database üzerinden yapılan diğer örnekler için [link1](https://github.com/Mertcali/etiyaAkademi/tree/master/workshop3_10_Sql_Examples) ve [link2](https://github.com/Mertcali/etiyaAkademi/tree/master/workshop4_10_Sql_Examples_2) linklerine bakabilirsiniz.
+
 > Sorgulardaki joinleri daha iyi anlamak için örnek bir png:
 
 ![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sql_joins.PNG)
