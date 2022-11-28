@@ -1,8 +1,18 @@
--- hangi ürünler hangi tedarikçiler tarafından üretiliyor?
+## Bu ödevde örnek sql sorguları yazılmış ve çıktıları paylaşılmıştır. 28/11/2022
+
+> Sorgulardaki joinleri daha iyi anlamak için örnek bir png:
+
+Soru 1 : Hangi ürünler hangi tedarikçiler tarafından üretiliyor?
+
+Sorgu : 
+
+```
 select p.name,ps.supplier_id,s.supplier_number from products p 
 inner join product_suppliers ps on p.id = ps.product_id 
 inner join suppliers s on s.id = ps.supplier_id
 group by p.name,ps.supplier_id,s.supplier_number
+```
+
 
 -- bir ürünün birden fazla tedarikçisi varsa getir ve kaç tedarikçisi
 -- olduğunu göster.
