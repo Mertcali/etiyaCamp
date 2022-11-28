@@ -2,6 +2,8 @@
 
 > Sorgulardaki joinleri daha iyi anlamak için örnek bir png:
 
+![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sql_joins.PNG)
+
 Soru 1 : Hangi ürünler hangi tedarikçiler tarafından üretiliyor?
 
 Sorgu : 
@@ -12,6 +14,10 @@ inner join product_suppliers ps on p.id = ps.product_id
 inner join suppliers s on s.id = ps.supplier_id
 group by p.name,ps.supplier_id,s.supplier_number
 ```
+
+Çıktı : 
+
+![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu1.PNG)
 
 
 -- bir ürünün birden fazla tedarikçisi varsa getir ve kaç tedarikçisi
