@@ -1,142 +1,34 @@
 # Postgre'de daha önce oluşturulan veritabanı Java'da modellendi Veri İletişim Katmanında JPA Kullanıldı.Bu ödevde ise JPQL,JPA Hazır fonksiyonları ve DTO gibi kavramların araştırılması istenildi. 04/12/2022
 
-## Örnek database klasörün içerisinde paylaşılmıştır ve örnekler o database üzerinden yapılmıştır. Aynı database üzerinden yapılan diğer örnekler için [link1](https://github.com/Mertcali/etiyaAkademi/tree/master/workshop3_10_Sql_Examples) ve [link2](https://github.com/Mertcali/etiyaAkademi/tree/master/workshop4_10_Sql_Examples_2) linklerine bakabilirsiniz.
+> Javada modellenmiş ve bazı endpointleri oluşturulmuş haline [buradan](https://github.com/Mertcali/etiyaSpring) ulaşabilirsiniz.
 
-> Sorgulardaki joinleri daha iyi anlamak için örnek bir png:
+## JPQL Nedir?
 
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sql_joins.PNG)
+- Açılımı Java Persistence Query Language.
+- JPA kullanıcaz dedik, JPQL'de JPA Standartının entitylerimizi sorgulamak için oluşturduğu bir dil.
+- SQL'e benzemekte.
 
-### Soru 1 : Hangi ürünler hangi tedarikçiler tarafından üretiliyor?
+## Nasıl kullanırız?
 
-### Sorgu : 
+- Oluşturduğumuz repository'e gelip '@Query' notasyonuyla birlikte sorgumuzu, imzanın üzerine yazıyoruz. Biraz sorguları inceleyelim.
 
-```
-select p.name,ps.supplier_id,s.supplier_number from products p 
-inner join product_suppliers ps on p.id = ps.product_id 
-inner join suppliers s on s.id = ps.supplier_id
-group by p.name,ps.supplier_id,s.supplier_number
-```
+- JPQL Order By Sorgusu:
 
-### Çıktı : 
+> Ülke isimlerini alfabetik olarak tersten sırala.
 
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu1.PNG)
+```@Query("Select c from Country as c ORDER BY c.name DESC")
+    List<Country> findAllCountriesOrderByName();```
+    
+- JPQL Between Sorgusu:
 
-------------------------------------------
+> Doğum tarihleri ?1(1. parametre) ?2(2.parametre) arasında olanları getir.
 
-### Soru 2 : Bir ürünün birden fazla tedarikçisi varsa getir ve kaç tedarikçisi olduğunu göster.
+```@Query("SELECT c FROM Customer c WHERE c.birthDate BETWEEN ?1 AND ?2")
+    List<Customer> findAllCustomersWithBirthDate(Date start, Date end);```
 
-### Sorgu : 
+- JPQL Like Sorgusu:
 
-```
-select p.name, count(ps.supplier_id) as "URETICI SAYISI" from products p 
-inner join product_suppliers ps on p.id = ps.product_id group by p.name
-having count(ps.supplier_id) > 1
-```
+> Müşteri Numarasının içerisinde ?1(1. parametre) olanları getir.
 
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu2.PNG)
-
-------------------
-
-### Soru 3 : Tedarikçisi olmayan(bir nevi artık üretilmeyen) ürünleri getir.
-
-### Sorgu :
-
-```
-select * from products p 
-left join product_suppliers ps
-on p.id = ps.product_id where ps.supplier_id is null
-```
-
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu3.PNG)
-
-### Soru 4 : Adresi veya telefon numarası olmayan kullanıcıları getir.
-
-### Sorgu :
-
-```
-select * from addresses ad full outer join users us
-on ad.user_id = us.id where street_id is null or phone_number is null
-```
-
-
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu4.PNG)
-
-------------------
-
-### Soru 5 : Fiyatı 200 - 500  arasında olan ürünleri listele.
-
-### Sorgu :
-
-```
-select * from products where cast(unit_price as numeric) between 100 and 400
-```
-
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu5.PNG)
-
------------------------
-
-### Soru 6 : İsmi Mert olan kullanıcıları listele.
-
-### Sorgu :
-
-```
-select * from users where lower(name) in('mert')
-```
-
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu6.PNG)
-
-
------------------------------
-
-### Soru 7 : Bir ülke ekle.
-
-### Sorgu :
-
-```
-insert into countries (name) values ('Belçika')
-```
-
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu7.PNG)
-
-----------------------
-
-### Soru 8 : Belçika adlı ülkeyi güncelle.
-
-### Sorgu :
-
-```
-update countries set name ='Belçika Güncelleme' where name = 'Belçika'
-```
-
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu8.PNG)
-
-------------------------
-
-### Soru 9 : Belçika adlı ülkeyi sil.
-
-### Sorgu :
-
-```
-delete from countries where name = 'Belçika Güncelleme'
-```
-
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu9.PNG)
-
-
-
+```@Query("SELECT c FROM Customer c WHERE c.customerNumber LIKE %?1%")
+    List<Customer> findAllCustomersLike(String customerNumber);```
