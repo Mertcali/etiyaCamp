@@ -30,6 +30,13 @@
     List<Customer> findAllCustomersWithBirthDate(Date start, Date end);
 ```
 
+- Başka Bir Şekilde Between Yazılışı:
+
+```
+@Query("SELECT p FROM Product p WHERE p.unitPrice BETWEEN :start and :end")
+    List<Product> findAllProductsUnitPriceBetween(double start, double end);
+```
+
 - JPQL Like Sorgusu:
 
 > Müşteri Numarasının içerisinde ?1(1. parametre) olanları getir.
