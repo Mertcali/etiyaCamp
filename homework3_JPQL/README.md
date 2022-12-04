@@ -10,7 +10,7 @@
 
 ## Nasıl kullanırız?
 
-- Oluşturduğumuz repository'e gelip '@Query' notasyonuyla birlikte sorgumuzu, imzanın üzerine yazıyoruz. Biraz sorguları inceleyelim.
+### Oluşturduğumuz repository'e gelip '@Query' notasyonuyla birlikte sorgumuzu, imzanın üzerine yazıyoruz. Biraz sorguları inceleyelim.
 
 - JPQL Order By Sorgusu:
 
@@ -44,4 +44,12 @@
 ```
 @Query("SELECT c FROM Customer c WHERE c.customerNumber LIKE %?1%")
 List<Customer> findAllCustomersLike(String customerNumber);
+```
+
+- JPQL Join Sorgusu:
+
+> Aslında burada native sqlde join on karşılığı olarak fkyı a.addressType şeklinde belirtiyoruz 
+
+```@Query("Select a from Address a JOIN a.addressType at")
+    List<Address> findByAddressType();
 ```
