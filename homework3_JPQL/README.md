@@ -16,19 +16,25 @@
 
 > Ülke isimlerini alfabetik olarak tersten sırala.
 
-```@Query("Select c from Country as c ORDER BY c.name DESC")
-    List<Country> findAllCountriesOrderByName();```
+```
+@Query("Select c from Country as c ORDER BY c.name DESC")
+    List<Country> findAllCountriesOrderByName();
+```
     
 - JPQL Between Sorgusu:
 
 > Doğum tarihleri ?1(1. parametre) ?2(2.parametre) arasında olanları getir.
 
-```@Query("SELECT c FROM Customer c WHERE c.birthDate BETWEEN ?1 AND ?2")
-    List<Customer> findAllCustomersWithBirthDate(Date start, Date end);```
+```
+@Query("SELECT c FROM Customer c WHERE c.birthDate BETWEEN ?1 AND ?2")
+    List<Customer> findAllCustomersWithBirthDate(Date start, Date end);
+    ```
 
 - JPQL Like Sorgusu:
 
 > Müşteri Numarasının içerisinde ?1(1. parametre) olanları getir.
 
-```@Query("SELECT c FROM Customer c WHERE c.customerNumber LIKE %?1%")
-    List<Customer> findAllCustomersLike(String customerNumber);```
+```
+@Query("SELECT c FROM Customer c WHERE c.customerNumber LIKE %?1%")
+    List<Customer> findAllCustomersLike(String customerNumber);
+    ```
