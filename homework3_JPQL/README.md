@@ -54,3 +54,36 @@ List<Customer> findAllCustomersLike(String customerNumber);
 @Query("Select a from Address a JOIN a.addressType at")
 List<Address> findByAddressType();
 ```
+---------------------
+
+## Gelelim JPA'in bizim işlerimizi çokça kolaylaştırdığı hazır metotlarına.
+
+Jpa bize hazır metotlar sunarak çoğu zaman query yazmaktan bizi kurtarabiliyor. En basit olarak native sql'de yazdığım select * from products şeklinde bir select all sorgusunu javada endpointe getAll şeklinde bir endpoint'e götürmek istiyorsunuz. JPA Bunu sizin için findAll metoduyla yapıyor. Nasıl kullanılıyor peki?
+Repositoryimiz içerisinde findAll vb. gibi bir imza tanımlamamıza gerek yok. Linkte kullanılan veritabanındaki product nesnesi üzerinden ilerleyelim. 
+
+* Product modellemem oluşturuldu.
+* ProductRepository oluşturuldu ve JpaRepository extend edildi. (Burada jparepository'e ctrl+sol tık yaparak içerisindeki metotları da görebilirsiniz)
+* Servis tarafında dependency injection ile ProductRepository'im çağırıldı.
+
+```
+private IProductRepository productRepository;
+
+    @Autowired
+    public ProductManager(IProductRepository IProductRepository) {
+        this.productRepository = IProductRepository;
+    }
+```
+
+* Servis tarafında getAll metodunu yazarken;
+
+```
+@Override
+    public List<Product> getAll() {
+        return productRepository.findAll();
+    }
+```
+
+Görüldüğü üzere .findAll metodu kendiliğinden gelmekte. Benim bir imza veya metot oluşturmama gerek yok. Kendisi JpaRepository içerisinde bulunmakta. Tabii içerisinde bulunan bütün metotlardan bahsetmeyeceğim ancak productRepository. yazdıktan sonra orada gelen metotları inceleyerek bakabilirsiniz. ***Exist,FindById,save,delete*** gibi metotlar hazır şekilde bulunmakta.
+
+
+
