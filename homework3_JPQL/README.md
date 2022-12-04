@@ -85,5 +85,25 @@ private IProductRepository productRepository;
 
 Görüldüğü üzere .findAll metodu kendiliğinden gelmekte. Benim bir imza veya metot oluşturmama gerek yok. Kendisi JpaRepository içerisinde bulunmakta. Tabii içerisinde bulunan bütün metotlardan bahsetmeyeceğim ancak productRepository. yazdıktan sonra orada gelen metotları inceleyerek bakabilirsiniz. ***Exist,FindById,save,delete*** gibi metotlar hazır şekilde bulunmakta.
 
+---------------
 
+### Gelelim DTO Nedir? Ne amaçla kullanılır?
 
+Açılımı : Data Transfer Object. Bir nevi veri taşıma nesnesi? 
+
+Nasıl taşıyacağım verimi, nereye taşıyacağım?
+
+Düşünelim ki ben ürünlerimi listelemek istiyorum ama ürünlerimin hangi kategoride olduğunu da birlikte listelemek istiyorum. Biz içeride ilişkilendirmelerimizi yaptık evet ancak ürün geldiğinde kategori ismi vb. tek bir objeyle getirmek için DTO'ları kullanıyoruz. Böylece ileride isteklerimiz değiştiğinde tek obje üzerinden değişiklikler yapabiliyoruz.
+
+Örnek kullanım olarak:
+
+* Entities paketimize DTOS diye bir paket oluşturup içerisine ProductsWithCategoryDTO oluşturabiliriz.
+* Daha sonra içerisinde neyi getirmek istediğimiz belirtebiliriz.(String productName, String categoryName, int id)
+* ProductRepositorymize gidip buna ait bir get metodu yazabiliriz.(List<ProductWithCategoryDto> getProductWithCategoryDetails();
+* Daha sonra yukarıda yaptığımız gibi buna bir joinli query yazabiliriz.
+    
+```
+   @Query("Select new ProductWithCategoryDto(p.id, p.productName, c.categoryName)" + "From Category c Inner Join c.products p")
+```
+    
+* Daha sonra servis,manager,endpoint yazılarak çalıştırılabilir.
