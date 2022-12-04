@@ -28,7 +28,7 @@
 ```
 @Query("SELECT c FROM Customer c WHERE c.birthDate BETWEEN ?1 AND ?2")
     List<Customer> findAllCustomersWithBirthDate(Date start, Date end);
-    ```
+```
 
 - JPQL Like Sorgusu:
 
@@ -36,5 +36,5 @@
 
 ```
 @Query("SELECT c FROM Customer c WHERE c.customerNumber LIKE %?1%")
-    List<Customer> findAllCustomersLike(String customerNumber);
-    ```
+List<Customer> findAllCustomersLike(String customerNumber);
+```
