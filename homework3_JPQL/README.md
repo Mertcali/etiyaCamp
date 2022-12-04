@@ -50,6 +50,7 @@ List<Customer> findAllCustomersLike(String customerNumber);
 
 > Aslında burada native sqlde join on karşılığı olarak fkyı a.addressType şeklinde belirtiyoruz 
 
-```@Query("Select a from Address a JOIN a.addressType at")
-    List<Address> findByAddressType();
+```
+@Query("Select a from Address a JOIN a.addressType at")
+List<Address> findByAddressType();
 ```
