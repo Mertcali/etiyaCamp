@@ -103,7 +103,7 @@ Düşünelim ki ben ürünlerimi listelemek istiyorum ama ürünlerimin hangi ka
 * Daha sonra yukarıda yaptığımız gibi buna bir joinli query yazabiliriz.
     
 ```
-   @Query("Select new ProductWithCategoryDto(p.id, p.productName, c.categoryName)" + "From Category c Inner Join c.products p")
+   @Query("Select new (packagename).ProductWithCategoryDto(p.id, p.productName, c.categoryName)" + "From Category c Inner Join c.products p")
 ```
     
 * Daha sonra servis,manager,endpoint yazılarak çalıştırılabilir.
