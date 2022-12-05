@@ -108,7 +108,7 @@ Düşünelim ki ben ürünlerimi listelemek istiyorum ama ürünlerimin hangi ka
     
 * Daha sonra servis,manager,endpoint yazılarak çalıştırılabilir.
 
-## Üzerinde çalışılan örnek proje için DTO'lu ve DTO'suz query örnekleri ve çıktıları.
+## Üzerinde çalışılan(yukarıda linklenen) örnek proje için DTO'lu ve DTO'suz query örnekleri ve çıktıları.
 
 ```
     @Query("select c from Category c inner join " +
