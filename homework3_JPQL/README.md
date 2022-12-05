@@ -107,3 +107,20 @@ Düşünelim ki ben ürünlerimi listelemek istiyorum ama ürünlerimin hangi ka
 ```
     
 * Daha sonra servis,manager,endpoint yazılarak çalıştırılabilir.
+
+## Üzerinde çalışılan örnek proje için DTO'lu ve DTO'suz query örnekleri ve çıktıları.
+
+```
+    @Query("select c from Category c inner join " +
+            "c.productCategories pc inner join pc.product p where c.id = :categoryId")
+    List<Category> denemeEndPoint(int categoryId);
+```
+
+***Oluşturulan DTO class'ı içerisindeki alanlar sırasıyla query'e girilmeli.***
+
+```
+    @Query("select new com.etiya.ecommercedemo4.business.dtos.response.category.GetAllCategoriesWithProductResponse" +
+            "(c.id, c.name, p.name) from Category c inner join " +
+            "c.productCategories pc inner join pc.product p where c.id = :categoryId")
+    List<GetAllCategoriesWithProductResponse> denemeEndPoint2(int categoryId);
+```
