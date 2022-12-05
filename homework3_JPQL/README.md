@@ -116,6 +116,8 @@ Düşünelim ki ben ürünlerimi listelemek istiyorum ama ürünlerimin hangi ka
     List<Category> denemeEndPoint(int categoryId);
 ```
 
+![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework3_JPQL/Sonuc1.PNG)
+
 ***Oluşturulan DTO class'ı içerisindeki alanlar sırasıyla query'e girilmeli.***
 
 ```
