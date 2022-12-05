@@ -126,3 +126,5 @@ Düşünelim ki ben ürünlerimi listelemek istiyorum ama ürünlerimin hangi ka
             "c.productCategories pc inner join pc.product p where c.id = :categoryId")
     List<GetAllCategoriesWithProductResponse> denemeEndPoint2(int categoryId);
 ```
+    
+![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework3_JPQL/Sonuc2.PNG)
