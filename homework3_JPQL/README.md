@@ -1,142 +1,126 @@
 # Postgre'de daha önce oluşturulan veritabanı Java'da modellendi Veri İletişim Katmanında JPA Kullanıldı.Bu ödevde ise JPQL,JPA Hazır fonksiyonları ve DTO gibi kavramların araştırılması istenildi. 04/12/2022
 
-## Örnek database klasörün içerisinde paylaşılmıştır ve örnekler o database üzerinden yapılmıştır. Aynı database üzerinden yapılan diğer örnekler için [link1](https://github.com/Mertcali/etiyaAkademi/tree/master/workshop3_10_Sql_Examples) ve [link2](https://github.com/Mertcali/etiyaAkademi/tree/master/workshop4_10_Sql_Examples_2) linklerine bakabilirsiniz.
+> Javada modellenmiş ve bazı endpointleri oluşturulmuş haline [buradan](https://github.com/Mertcali/etiyaSpring) ulaşabilirsiniz.
 
-> Sorgulardaki joinleri daha iyi anlamak için örnek bir png:
+## JPQL Nedir?
 
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sql_joins.PNG)
+- Açılımı Java Persistence Query Language.
+- JPA kullanıcaz dedik, JPQL'de JPA Standartının entitylerimizi sorgulamak için oluşturduğu bir dil.
+- SQL'e benzemekte.
 
-### Soru 1 : Hangi ürünler hangi tedarikçiler tarafından üretiliyor?
+## Nasıl kullanırız?
 
-### Sorgu : 
+### Oluşturduğumuz repository'e gelip '@Query' notasyonuyla birlikte sorgumuzu, imzanın üzerine yazıyoruz. Biraz sorguları inceleyelim.
 
-```
-select p.name,ps.supplier_id,s.supplier_number from products p 
-inner join product_suppliers ps on p.id = ps.product_id 
-inner join suppliers s on s.id = ps.supplier_id
-group by p.name,ps.supplier_id,s.supplier_number
-```
+- JPQL Order By Sorgusu:
 
-### Çıktı : 
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu1.PNG)
-
-------------------------------------------
-
-### Soru 2 : Bir ürünün birden fazla tedarikçisi varsa getir ve kaç tedarikçisi olduğunu göster.
-
-### Sorgu : 
+> Ülke isimlerini alfabetik olarak tersten sırala.
 
 ```
-select p.name, count(ps.supplier_id) as "URETICI SAYISI" from products p 
-inner join product_suppliers ps on p.id = ps.product_id group by p.name
-having count(ps.supplier_id) > 1
+@Query("Select c from Country as c ORDER BY c.name DESC")
+    List<Country> findAllCountriesOrderByName();
 ```
+    
+- JPQL Between Sorgusu:
 
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu2.PNG)
-
-------------------
-
-### Soru 3 : Tedarikçisi olmayan(bir nevi artık üretilmeyen) ürünleri getir.
-
-### Sorgu :
+> Doğum tarihleri ?1(1. parametre) ?2(2.parametre) arasında olanları getir.
 
 ```
-select * from products p 
-left join product_suppliers ps
-on p.id = ps.product_id where ps.supplier_id is null
+@Query("SELECT c FROM Customer c WHERE c.birthDate BETWEEN ?1 AND ?2")
+    List<Customer> findAllCustomersWithBirthDate(Date start, Date end);
 ```
 
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu3.PNG)
-
-### Soru 4 : Adresi veya telefon numarası olmayan kullanıcıları getir.
-
-### Sorgu :
+- Başka Bir Şekilde Between Yazılışı:
 
 ```
-select * from addresses ad full outer join users us
-on ad.user_id = us.id where street_id is null or phone_number is null
+@Query("SELECT p FROM Product p WHERE p.unitPrice BETWEEN :start and :end")
+    List<Product> findAllProductsUnitPriceBetween(double start, double end);
 ```
 
+- JPQL Like Sorgusu:
 
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu4.PNG)
-
-------------------
-
-### Soru 5 : Fiyatı 200 - 500  arasında olan ürünleri listele.
-
-### Sorgu :
+> Müşteri Numarasının içerisinde ?1(1. parametre) olanları getir.
 
 ```
-select * from products where cast(unit_price as numeric) between 100 and 400
+@Query("SELECT c FROM Customer c WHERE c.customerNumber LIKE %?1%")
+List<Customer> findAllCustomersLike(String customerNumber);
 ```
 
-### Çıktı :
+- JPQL Join Sorgusu:
 
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu5.PNG)
-
------------------------
-
-### Soru 6 : İsmi Mert olan kullanıcıları listele.
-
-### Sorgu :
+> Aslında burada native sqlde join on karşılığı olarak fkyı a.addressType şeklinde belirtiyoruz 
 
 ```
-select * from users where lower(name) in('mert')
+@Query("Select a from Address a JOIN a.addressType at")
+List<Address> findByAddressType();
 ```
+---------------------
 
-### Çıktı :
+## Gelelim JPA'in bizim işlerimizi çokça kolaylaştırdığı hazır metotlarına.
 
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu6.PNG)
+Jpa bize hazır metotlar sunarak çoğu zaman query yazmaktan bizi kurtarabiliyor. En basit olarak native sql'de yazdığım select * from products şeklinde bir select all sorgusunu javada endpointe getAll şeklinde bir endpoint'e götürmek istiyorsunuz. JPA Bunu sizin için findAll metoduyla yapıyor. Nasıl kullanılıyor peki?
+Repositoryimiz içerisinde findAll vb. gibi bir imza tanımlamamıza gerek yok. Linkte kullanılan veritabanındaki product nesnesi üzerinden ilerleyelim. 
 
-
------------------------------
-
-### Soru 7 : Bir ülke ekle.
-
-### Sorgu :
-
-```
-insert into countries (name) values ('Belçika')
-```
-
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu7.PNG)
-
-----------------------
-
-### Soru 8 : Belçika adlı ülkeyi güncelle.
-
-### Sorgu :
+* Product modellemem oluşturuldu.
+* ProductRepository oluşturuldu ve JpaRepository extend edildi. (Burada jparepository'e ctrl+sol tık yaparak içerisindeki metotları da görebilirsiniz)
+* Servis tarafında dependency injection ile ProductRepository'im çağırıldı.
 
 ```
-update countries set name ='Belçika Güncelleme' where name = 'Belçika'
+private IProductRepository productRepository;
+
+    @Autowired
+    public ProductManager(IProductRepository IProductRepository) {
+        this.productRepository = IProductRepository;
+    }
 ```
 
-### Çıktı :
-
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu8.PNG)
-
-------------------------
-
-### Soru 9 : Belçika adlı ülkeyi sil.
-
-### Sorgu :
+* Servis tarafında getAll metodunu yazarken;
 
 ```
-delete from countries where name = 'Belçika Güncelleme'
+@Override
+    public List<Product> getAll() {
+        return productRepository.findAll();
+    }
 ```
 
-### Çıktı :
+Görüldüğü üzere .findAll metodu kendiliğinden gelmekte. Benim bir imza veya metot oluşturmama gerek yok. Kendisi JpaRepository içerisinde bulunmakta. Tabii içerisinde bulunan bütün metotlardan bahsetmeyeceğim ancak productRepository. yazdıktan sonra orada gelen metotları inceleyerek bakabilirsiniz. ***Exist,FindById,save,delete*** gibi metotlar hazır şekilde bulunmakta.
 
-![alt text](https://github.com/Mertcali/etiyaCamp/blob/master/homework2_sql/pngs/sorgu9.PNG)
+---------------
 
+### Gelelim DTO Nedir? Ne amaçla kullanılır?
 
+Açılımı : Data Transfer Object. Bir nevi veri taşıma nesnesi? 
 
+Nasıl taşıyacağım verimi, nereye taşıyacağım?
+
+Düşünelim ki ben ürünlerimi listelemek istiyorum ama ürünlerimin hangi kategoride olduğunu da birlikte listelemek istiyorum. Biz içeride ilişkilendirmelerimizi yaptık evet ancak ürün geldiğinde kategori ismi vb. tek bir objeyle getirmek için DTO'ları kullanıyoruz. Böylece ileride isteklerimiz değiştiğinde tek obje üzerinden değişiklikler yapabiliyoruz.
+
+Örnek kullanım olarak:
+
+* Entities paketimize DTOS diye bir paket oluşturup içerisine ProductsWithCategoryDTO oluşturabiliriz.
+* Daha sonra içerisinde neyi getirmek istediğimiz belirtebiliriz.(String productName, String categoryName, int id)
+* ProductRepositorymize gidip buna ait bir get metodu yazabiliriz.(List<ProductWithCategoryDto> getProductWithCategoryDetails();
+* Daha sonra yukarıda yaptığımız gibi buna bir joinli query yazabiliriz.
+    
+```
+   @Query("Select new (packagename).ProductWithCategoryDto(p.id, p.productName, c.categoryName)" + "From Category c Inner Join c.products p")
+```
+    
+* Daha sonra servis,manager,endpoint yazılarak çalıştırılabilir.
+
+## Üzerinde çalışılan örnek proje için DTO'lu ve DTO'suz query örnekleri ve çıktıları.
+
+```
+    @Query("select c from Category c inner join " +
+            "c.productCategories pc inner join pc.product p where c.id = :categoryId")
+    List<Category> denemeEndPoint(int categoryId);
+```
+
+***Oluşturulan DTO class'ı içerisindeki alanlar sırasıyla query'e girilmeli.***
+
+```
+    @Query("select new com.etiya.ecommercedemo4.business.dtos.response.category.GetAllCategoriesWithProductResponse" +
+            "(c.id, c.name, p.name) from Category c inner join " +
+            "c.productCategories pc inner join pc.product p where c.id = :categoryId")
+    List<GetAllCategoriesWithProductResponse> denemeEndPoint2(int categoryId);
+```
