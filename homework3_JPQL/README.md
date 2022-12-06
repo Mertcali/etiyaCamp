@@ -58,7 +58,7 @@ List<Address> findByAddressType();
 
 ## Gelelim JPA'in bizim işlerimizi çokça kolaylaştırdığı hazır metotlarına.
 
-[JPA METOTLARI] (https://www.baeldung.com/spring-data-derived-queries)
+[JPA METOTLARI](https://www.baeldung.com/spring-data-derived-queries)
 
 Jpa bize hazır metotlar sunarak çoğu zaman query yazmaktan bizi kurtarabiliyor. En basit olarak native sql'de yazdığım select * from products şeklinde bir select all sorgusunu javada endpointe getAll şeklinde bir endpoint'e götürmek istiyorsunuz. JPA Bunu sizin için findAll metoduyla yapıyor. Nasıl kullanılıyor peki?
 Repositoryimiz içerisinde findAll vb. gibi bir imza tanımlamamıza gerek yok. Linkte kullanılan veritabanındaki product nesnesi üzerinden ilerleyelim. 
